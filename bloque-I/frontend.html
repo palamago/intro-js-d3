@@ -86,95 +86,184 @@
           <div class="col-md-12">
             <h2>Archivo JS en documento</h2>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <p>Documento base completo. Secciones.</p>
             <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/base.html">Ver Ejemplo</a></p>
           </div>
-          <div class="col-md-6">
-            <pre>
-              <code class="html">
-                &lt;!DOCTYPE html&gt;
-                &lt;html lang="en"&gt;
-                &lt;head&gt;
-                  &lt;meta charset="utf-8"/&gt;
-                  &lt;title&gt;Un pequeño documento&lt;/title&gt;
-                &lt;/head&gt;
-                &lt;body&gt;
-                  &lt;h1&gt;Título principal de mi documento&lt;/h1&gt;
-                  &lt;p&gt;Miren, estoy programando con HTML.&lt;/p&gt;
-                &lt;/body&gt;
-                &lt;/html&gt;
-              </code>
-            </pre>
+          <div class="col-md-9">
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"/&gt;
+  &lt;title&gt;Un pequeño documento&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Título principal de mi documento&lt;/h1&gt;
+  &lt;p&gt;Miren, estoy programando con HTML.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <p>Tags especiales &lt;style&gt; y &lt;script&gt;.</p>
             <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/tags.html">Ver Ejemplo</a></p>
           </div>
-          <div class="col-md-6">
-            <pre>
-              <code class="html">
-                &lt;!DOCTYPE html&gt;
-                &lt;html lang="en"&gt;
-                &lt;head&gt;
-                  &lt;meta charset="utf-8"/&gt;
-                  &lt;title&gt;Un pequeño documento&lt;/title&gt;
-                  &lt;style type="text/css"&gt;
-                    h1{
-                      color: red;
-                    }
-                    p{
-                      color: blue;
-                    }
-                  &lt;/style&gt;
-                &lt;/head&gt;
-                &lt;body&gt;
-                  &lt;h1&gt;Título principal de mi documento&lt;/h1&gt;
-                  &lt;p&gt;Miren, estoy programando con HTML.&lt;/p&gt;
-                  &lt;p id="hora"&gt;Aquí va la hora&lt;/p&gt;
+          <div class="col-md-9">
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"/&gt;
+  &lt;title&gt;Un pequeño documento&lt;/title&gt;
+  &lt;style type="text/css"&gt;
+    h1{
+      color: red;
+    }
+    p{
+      color: blue;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Título principal de mi documento&lt;/h1&gt;
+  &lt;p&gt;Miren, estoy programando con HTML.&lt;/p&gt;
+  &lt;p id="hora"&gt;Aquí va la hora&lt;/p&gt;
 
-                  &lt;script type="text/javascript"&gt;
-                    document.getElementById('hora').innerHTML = Date();
-                    document.getElementById('hora').style.color = "green";
-                    document.getElementById('hora').style.fontSize = "50px";
-                  &lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+    document.getElementById('hora').innerHTML = Date();
+    document.getElementById('hora').style.color = "green";
+    document.getElementById('hora').style.fontSize = "50px";
+  &lt;/script&gt;
 
-                &lt;/body&gt;
-                &lt;/html&gt;
-              </code>
-            </pre>
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-3">
             <p>Archivos externos. Propios y de terceros.</p>
-            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/archivos/index.html">Ver Ejemplo</a></p>
+            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/archivos/index.html">Ver Ejemplo</a> <a class="btn btn-xs btn-success" target="_blank" href="https://github.com/palamago/intro-js-d3/tree/gh-pages/bloque-I/ejemplos/archivos">Ver Archivos</a></p>
           </div>
-          <div class="col-md-6">
-            <pre>
-              <code class="html">
-                &lt;!DOCTYPE html&gt;
-                &lt;html lang="en"&gt;
-                &lt;head&gt;
-                  &lt;meta charset="utf-8"/&gt;
-                  &lt;title&gt;Un pequeño documento&lt;/title&gt;
-                  &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"&gt;
-                  &lt;link rel="stylesheet" type="text/css" href="estilo.css"&gt;
-                &lt;/head&gt;
-                &lt;body&gt;
-                  &lt;h1&gt;Título principal de mi documento&lt;/h1&gt;
-                  &lt;p&gt;Miren, estoy programando con HTML.&lt;/p&gt;
-                  &lt;p id="hora"&gt;Aquí va la hora&lt;/p&gt;
+          <div class="col-md-9">
+            <h3>index.html</h3>
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"/&gt;
+  &lt;title&gt;Un pequeño documento&lt;/title&gt;
+  &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"&gt;
+  &lt;link rel="stylesheet" type="text/css" href="estilo.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Título principal de mi documento&lt;/h1&gt;
+  &lt;p&gt;Miren, estoy programando con HTML.&lt;/p&gt;
+  &lt;p id="hora"&gt;Aquí va la hora&lt;/p&gt;
 
-                  &lt;script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"&gt;&lt;/script&gt;
-                  &lt;script type="text/javascript" src="script.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="script.js"&gt;&lt;/script&gt;
 
-                &lt;/body&gt;
-                &lt;/html&gt;
-              </code>
-            </pre>
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h3>script.js</h3>
+<pre><code class="js">$('#hora').html(Date()).css('color','green').css('fontSize','50px');
+</code></pre>
+            <h3>estilo.css</h3>
+<pre><code class="css">h1{
+  color: red;
+}
+p{
+  color: blue;
+}</code></pre>
           </div>
 
         </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h2>SVG: Scalable Vector Graphics</h2>
+          </div>
+          <div class="col-md-3">
+            <p>Gráficos vectoriales dentro de HTML.</p>
+            <p>Guía: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial">MDN Intro SVG</a> y <a href="http://www.w3schools.com/svg/svg_examples.asp" target="_blank">W3School</a></p>
+            <p>También existe canvas.</p>
+            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/svg.html">Ver Ejemplo</a></p>
+          </div>
+          <div class="col-md-9">
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"/&gt;
+  &lt;title&gt;Un pequeño documento&lt;/title&gt;
+  &lt;style type="text/css"&gt;
+    svg{
+      background-color: #ccc;
+    }
+  &lt;/style&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Título principal de mi documento&lt;/h1&gt;
+    &lt;p&gt;Miren, esto es SVG.&lt;/p&gt;
+    &lt;svg height="400" width="400"&gt;
+      &lt;circle cx="50" cy="50" r="25" /&gt;
+      &lt;circle cx="100" cy="100" r="30" stroke="black" stroke-width="3" fill="green" /&gt;
+      &lt;rect x="200" y="200" width="150" height="150" stroke-width="2" stroke="red" fill="blue"/&gt;
+      &lt;line x1="0" y1="0" x2="200" y2="200" stroke-width="1" stroke="purple" /&gt;
+      &lt;text x="300" y="100" font-size="60" text-anchor="middle" fill="white"&gt;SVG&lt;/text&gt;
+  &lt;/svg&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </div>
+        </div>
+
+
+        <hr>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Datos: JSON y CSV</h2>
+            <p>Formatos de la información, principales, hay otros.</p>
+          </div>
+          <div class="col-md-6">
+            <h3>JSON: JavaScript Object Notation</h3>
+            <pre><code class="json">[
+{
+  "nombre":"Pablo",
+  "apellido":"Paladino",
+  "twitter":"@palamago",
+  "edad":32,
+  "casado":true
+},
+...
+]</code></pre>
+          </div>
+          <div class="col-md-6">
+            <h3>CSV: Comma Separated Values</h3>
+            <pre><code class="csv">nombre,apellido,twitter,edad,casado
+Pablo,Paladino,@palamago,32,true
+...</code></pre>
+          </div>
+        </div>
+
+
+        <hr>
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <h2>AJAX: Asynchronous JavaScript and XML</h2>
+          </div>
+          <div class="col-md-6">
+            <p>De manera asíncrona, refrescar o agregar datos a la página que estamos viendo. Caso: Aceptar amigo de Facebook.</p>
+            <p>Traer información.</p>
+            <p>Guía: <a target="_blank" href="https://developer.mozilla.org/es/docs/AJAX/Primeros_Pasos">MDN Ajax</a></p>            
+          </div>
+          <div class="col-md-6">
+            <img class="img-responsive" src="http://imps.mcmaster.ca/courses/SE-4C03-07/wiki/vanschj/vanschj_picture1.png"/>
+            
+          </div>
+        </div>
+
+
 
 
     </div>
