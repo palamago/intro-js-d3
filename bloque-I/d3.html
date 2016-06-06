@@ -9,26 +9,135 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
   </head>
   <body>
     <div class="container">
         <div class="row">
-          <h1>Introducción D3 <a class="btn btn-primary pull-right" href="../index.html">Volver</a></h1>
-          <hr>
+          <div class="col-md-12">
+            <h1>Introducción D3 <a class="btn btn-primary pull-right" href="../index.html">Volver</a></h1>
+            <img src="https://www.pubnub.com/wp-content/uploads/2014/01/D3.js-Logo.png" class="img-responsive">
+            <hr>
 
-          <p>Conoceremos conceptos básicos del desarrollo frontend</p>
-          <ul>
-            <li>Introducción a d3.js como librería</li>
-            <li>Ejemplos de la posibilidad de d3</li>
-          </ul>
+            <p>Conoceremos conceptos básicos del desarrollo con d3.js</p>
+            <ul>
+              <li>Introducción a d3.js como librería</li>
+              <li>Ejemplos de la posibilidad de d3</li>
+            </ul>
+          
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Introducción a d3.js como librería</h2>
+          </div>
+          <div class="col-md-6">
+            <p>Data Driven Documents. Asociar data a elementos del DOM.</p>
+            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/d3.html">Ver Ejemplo</a></p>
+            <h3>Selecciones:</h3>
+            <pre><code class="js">d3.selectAll("p").style("color", "red");</code></pre>
+            <pre><code class="js">d3.select("body").style("background-color", "black");</code></pre>
+            <h3>Propiedades dinámicas:</h3>
+            <pre><code class="js">d3.selectAll("p").style("color", function() {
+  return "rgb(0,125,255)";
+});
+d3.selectAll("p").style("color", function() {
+  return "rgb(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) +","+ Math.floor(Math.random() * 255) +")";
+});</code></pre>
+            <pre><code class="js">d3.selectAll("p").style("color", function(d, i) {
+  return i % 2 ? "red" : "green";
+});</code></pre>
+            <h3>Enter, Updates & Exit</h3>
+            <p>Probar el siguiente código agregando o quitando números del arreglo.</p>
+            <pre><code class="js">// Update…
+var p = d3.select("body").selectAll("p")
+    .data([4, 8, 15, 16, 23, 42])
+    .text(function(d) { return d; });
+
+// Enter…
+p.enter().append("p")
+    .text(function(d) { return d; });
+
+// Exit…
+p.exit().remove();</code></pre>
+        <h3>Transitions</h3>
+        <pre><code class="js">d3.select("body").transition()
+    .duration(1000)
+    .style("background-color", "red");
+d3.select("body").transition()
+    .duration(1000)
+    .style("background-color", "green");</code></pre>
+      <pre><code class="js">d3.selectAll('p')
+    .transition()
+    .duration(1000)
+    .style("font-size","30px");</code></pre>
+      <pre><code class="js">d3.selectAll("p")
+    .data([8,10, 15, 18, 23, 42])
+    .text(function(d) { return 'Tiene Font-Size:' + d; })
+    .transition()
+    .duration(1000)
+    .style("font-size",function(d){ return d+'px';});</code></pre>
+
 
         </div>
-      </div>
+         <div class="col-md-6">
+            <h3>Agregar D3 desde recurso externo</h3>
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"/&gt;
+  &lt;title&gt;Un pequeño documento&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Miren, estoy programando con D3.&lt;/p&gt;
+  &lt;p&gt;Miren, estoy programando con D3.&lt;/p&gt;
+  &lt;p&gt;Miren, estoy programando con D3.&lt;/p&gt;
+  &lt;p&gt;Miren, estoy programando con D3.&lt;/p&gt;
+  &lt;p&gt;Miren, estoy programando con D3.&lt;/p&gt;
+  &lt;p&gt;Miren, estoy programando con D3.&lt;/p&gt;
+  &lt;script src="https://d3js.org/d3.v3.min.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Ejemplos de la posibilidad de d3</h2>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li><a target="_blank" href="https://github.com/d3/d3/wiki/Gallery">D3.js Gallery</a></li>
+              <li><a target="_blank" href="http://christopheviau.com/d3list/gallery.html">Interactive Gallery</a></li>
+              <li><a target="_blank" href="http://techslides.com/over-1000-d3-js-examples-and-demos">+1000 examples</a></li>
+              <li><a target="_blank" href="https://bost.ocks.org/mike/">Mike's Site</a></li>
+              <li><a target="_blank" href="http://www.visualcinnamon.com/portfolio-category/d3-js">Visual Cinnamon</a></li>
+              <li><a target="_blank" href="https://www.jasondavies.com/">Jason Davies' Site</a></li>
+              <li><a target="_blank" href="http://vallandingham.me/vis/">Jim Vallandingham' Site</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <img src="https://ucarecdn.com/297a30fc-aeb2-43b7-9baf-250f34ea9f7d/" class="img-responsive">
+          </div>
+
+
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        hljs.initHighlightingOnLoad();
+      });
+    </script>
+
   </body>
 </html>
