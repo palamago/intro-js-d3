@@ -9,30 +9,185 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
   </head>
   <body>
     <div class="container">
         <div class="row">
-          <h1>Introducción Desarrollo Frontend <a class="btn btn-primary pull-right" href="../index.html">Volver</a></h1>
-          <hr>
+          <div class="col-md-12">
+            <h1>Introducción Desarrollo Frontend <a class="btn btn-primary pull-right" href="../index.html">Volver</a></h1>
+            <hr>
 
-          <p>Conoceremos conceptos básicos del desarrollo frontend:</p>
-          <ul>
-            <li>Frontend & Backend</li>
-            <li>HTML + CSS</li>
-            <li>Archivo JS en lugar de consola</li>
-            <li>SVG shapes, Canvas</li>
-            <li>Data:CSV y JSON</li>
-            <li>AJAX</li>
-          </ul>
+            <p>Conoceremos conceptos básicos y simplificados del desarrollo frontend:</p>
+            <ul>
+              <li>Frontend & Backend</li>
+              <li>HTML, CSS & Javascript</li>
+              <li>Archivo JS en documento</li>
+              <li>SVG shapes, Canvas</li>
+              <li>Data:CSV y JSON</li>
+              <li>AJAX</li>
+            </ul>
+          
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Frontend & Backend</h2>
+          </div>
+          <div class="col-md-6">
+            <p>Fronted: Encargado de interacción con usuario.</p>
+            <p>Backend: Administración del sitio, acceso a datos.</p>
+          </div>
+          <div class="col-md-6">
+            <p><img class="img-responsive" alt="Client-server-model.svg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Client-server-model.svg/1200px-Client-server-model.svg.png">
+            <br>De <a target="_blank" href="//commons.wikimedia.org/wiki/File:Gnome-fs-client.svg" title="File:Gnome-fs-client.svg">Gnome-fs-client.svg</a>: David Vignoni
+            <a target="_blank" href="//commons.wikimedia.org/wiki/File:Gnome-fs-server.svg" title="File:Gnome-fs-server.svg">Gnome-fs-server.svg</a>: David Vignoni
+            derivative work: <a target="_blank" href="//commons.wikimedia.org/wiki/User:Calimo" title="User:Calimo">Calimo</a> (<a target="_blank" href="//commons.wikimedia.org/wiki/User_talk:Calimo" title="User talk:Calimo"><span class="signature-talk">talk</span></a>) - <a target="_blank" href="//commons.wikimedia.org/wiki/File:Gnome-fs-client.svg" title="File:Gnome-fs-client.svg">Gnome-fs-client.svg</a>
+            <a target="_blank" href="//commons.wikimedia.org/wiki/File:Gnome-fs-server.svg" title="File:Gnome-fs-server.svg">Gnome-fs-server.svg</a>, <a title="GNU Lesser General Public License" target="_blank" href="http://www.gnu.org/licenses/lgpl.html">LGPL</a>, https://commons.wikimedia.org/w/index.php?curid=15782858</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h2>HTML, CSS & Javascript</h2>
+          </div>
+          <div class="col-md-6">
+            <h3>HTML: HyperText Markup Language</h3>
+            <p>Construcción de estructura de bloques de un sitio web. Define el contenido.</p>
+            <p>Guía: <a target="_blank" href="https://developer.mozilla.org/es/docs/Web/Guide/HTML/Introduction_alhtml">MDN Intro HTML</a> y <a href="http://www.w3schools.com/html/html_examples.asp" target="_blank">W3School</a></p>
+            <p>Referencias: <a target="_blank" href="https://developer.mozilla.org/es/docs/Web/HTML">MDN HTML</a> y <a target="_blank" href="https://developer.mozilla.org/es/docs/HTML/HTML5">MDN HTML5</a></p>
+            <p>Actividad HTML: Crear un título, un párrafo y una imagen: <a class="btn btn-xs btn-success" target="_blank" href="https://jsfiddle.net/palamago/usx9r8gd/">JSFiddle</a></p>
+
+            <h3>CSS: Cascading Style Sheets</h3>
+            <p>Especifica el layout, estilo y presentación.</p>
+            <p>Guías: <a target="_blank" href="https://developer.mozilla.org/es/docs/Web/CSS">CSS</a>, <a target="_blank" href="https://developer.mozilla.org/es/docs/Web/CSS/CSS3">CSS3</a>y <a href="http://www.w3schools.com/css/css_examples.asp" target="_blank">W3School</a></p> 
+            <p>Actividad CSS: Color en título, mayúsculas, fondo de la página y cambiar ancho de imagen: <a class="btn btn-xs btn-success" target="_blank" href="https://jsfiddle.net/palamago/sf8ma30p/">JSFiddle</a></p>
+
+            <h3>Javascript: Scripting en la web</h3>
+            <p>Define el comportamiento y puede modificar los anteriores</p>
+            <p>Guías: <a target="_blank" href="https://developer.mozilla.org/es/docs/Web/JavaScript/Guide">MDN JS</a>, <a target="_blank" href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia">MDN Referencia</a>y <a href="http://www.w3schools.com/css/css_examples.asp" target="_blank">W3School</a></p> 
+            <p>Actividad JS: Hacer que al click en el botón, se muestre la hora en rojo bien grande: <a class="btn btn-xs btn-success" target="_blank" href="https://jsfiddle.net/palamago/fpw0xt97/">JSFiddle</a></p>
+            <p>Actividad Jquery: Hacer que al click en el botón, se muestre la hora en rojo bien grande con Jquery: <a class="btn btn-xs btn-success" target="_blank" href="https://jsfiddle.net/palamago/6Lknx6mm/">JSFiddle</a></p>
+          </div>
+          <div class="col-md-6">
+            <p><img class="img-responsive" alt="" src="http://blog.teamtreehouse.com/wp-content/uploads/2014/11/progressive-enhancement.png">
+            <br>De <a target="_blank" href="http://blog.teamtreehouse.com/progressive-enhancement-past-present-future">http://blog.teamtreehouse.com/progressive-enhancement-past-present-future</a></p>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Archivo JS en documento</h2>
+          </div>
+          <div class="col-md-6">
+            <p>Documento base completo. Secciones.</p>
+            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/base.html">Ver Ejemplo</a></p>
+          </div>
+          <div class="col-md-6">
+            <pre>
+              <code class="html">
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+                &lt;head&gt;
+                  &lt;meta charset="utf-8"/&gt;
+                  &lt;title&gt;Un pequeño documento&lt;/title&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                  &lt;h1&gt;Título principal de mi documento&lt;/h1&gt;
+                  &lt;p&gt;Miren, estoy programando con HTML.&lt;/p&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-6">
+            <p>Tags especiales &lt;style&gt; y &lt;script&gt;.</p>
+            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/tags.html">Ver Ejemplo</a></p>
+          </div>
+          <div class="col-md-6">
+            <pre>
+              <code class="html">
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+                &lt;head&gt;
+                  &lt;meta charset="utf-8"/&gt;
+                  &lt;title&gt;Un pequeño documento&lt;/title&gt;
+                  &lt;style type="text/css"&gt;
+                    h1{
+                      color: red;
+                    }
+                    p{
+                      color: blue;
+                    }
+                  &lt;/style&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                  &lt;h1&gt;Título principal de mi documento&lt;/h1&gt;
+                  &lt;p&gt;Miren, estoy programando con HTML.&lt;/p&gt;
+                  &lt;p id="hora"&gt;Aquí va la hora&lt;/p&gt;
+
+                  &lt;script type="text/javascript"&gt;
+                    document.getElementById('hora').innerHTML = Date();
+                    document.getElementById('hora').style.color = "green";
+                    document.getElementById('hora').style.fontSize = "50px";
+                  &lt;/script&gt;
+
+                &lt;/body&gt;
+                &lt;/html&gt;
+              </code>
+            </pre>
+          </div>
+
+          <div class="col-md-6">
+            <p>Archivos externos. Propios y de terceros.</p>
+            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/archivos/index.html">Ver Ejemplo</a></p>
+          </div>
+          <div class="col-md-6">
+            <pre>
+              <code class="html">
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+                &lt;head&gt;
+                  &lt;meta charset="utf-8"/&gt;
+                  &lt;title&gt;Un pequeño documento&lt;/title&gt;
+                  &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"&gt;
+                  &lt;link rel="stylesheet" type="text/css" href="estilo.css"&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                  &lt;h1&gt;Título principal de mi documento&lt;/h1&gt;
+                  &lt;p&gt;Miren, estoy programando con HTML.&lt;/p&gt;
+                  &lt;p id="hora"&gt;Aquí va la hora&lt;/p&gt;
+
+                  &lt;script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"&gt;&lt;/script&gt;
+                  &lt;script type="text/javascript" src="script.js"&gt;&lt;/script&gt;
+
+                &lt;/body&gt;
+                &lt;/html&gt;
+              </code>
+            </pre>
+          </div>
 
         </div>
-      </div>
+
+
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        hljs.initHighlightingOnLoad();
+      });
+      </script>
   </body>
 </html>

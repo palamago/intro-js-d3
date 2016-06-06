@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Un pequeño documento</title>
+  <style type="text/css">
+    h1{
+      color: red;
+    }
+    p{
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Título principal de mi documento</h1>
+  <p>Miren, estoy programando con HTML.</p>
+  <p id="hora">Aquí va la hora</p>
+
+  <script type="text/javascript">
+    document.getElementById('hora').innerHTML = Date();
+    document.getElementById('hora').style.color = "green";
+    document.getElementById('hora').style.fontSize = "50px";
+  </script>
+
+</body>
+</html>
