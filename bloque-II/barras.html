@@ -9,14 +9,90 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
   </head>
   <body>
     <div class="container">
         <div class="row">
-          <h1>D3: gráfico de barras <a class="btn btn-primary pull-right" href="../index.html">Volver</a></h1>
+          <div class="col-md-12">
+            <h1>D3: gráfico de barras <a class="btn btn-primary pull-right" href="../index.html">Volver</a></h1>
+            <hr>
+          </div>
+
+          <div class="col-md-6">
+            <h3>Gráfico en d3 usando divs</h3>
+            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/template.html">Ver template</a> <a class="btn btn-xs btn-success" target="_blank" href="ejemplos/bar-div.html">Ver solución</a></p>
+            <p>Actividad D3: Dada la información de los goleadores de los mundiales crear un gráfico de barras horizontales, usando divs de HTML, d3.js y CSS.</p>
+            
+<pre><code class="javascript">//Crear Divs
+  d3.select("#chart")
+      .selectAll("div")
+      .data(data)
+      .enter().append("div")
+      .style("width", function(d) { return 10*d.goles + "px"; })
+      .text(function(d) { return d.goles; });</code></pre>
+
+            <h3>Escalas</h3>
+            <p>Calcular el máximo y agregar escala para el ancho de los divs.</p>
+
+<pre><code class="javascript">//Gol Máximo
+var golesMax = d3.max(data,function(d){
+      return d.goles;
+    });
+
+//Escala X
+var x = d3.scale.linear()
+    .domain([0, golesMax ])
+    .range([0, 400]);
+
+//Crear Divs
+d3.select("#chart")
+    .selectAll("div")
+    .data(data)
+    .enter().append("div")
+    .style("width", function(d) { return x(d.goles) + "px"; })
+    .text(function(d) { return d.nombre + ' - ' + d.goles; });</code></pre>
+
           <hr>
 
-          <p>Crearemos un gráfico de barras:</p>
+          <h3>Gráfico en d3 usando svg</h3>
+          <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/template.html">Ver template</a> <a class="btn btn-xs btn-success" target="_blank" href="ejemplos/bar-svg.html">Ver solución</a></p>
+          <p>Actividad D3: Dada la información de los goleadores de los mundiales crear un gráfico de barras horizontales, usando rect de SVG, d3.js y CSS.</p>
+
+
+
+          </div>
+
+          <div class="col-md-6">
+            <p>Goleadores en mundiales</p>
+            <pre><code class="json">[
+{"nombre":"Miroslav Klose","equipo":"Alemania","goles":16,"partidos":24,"promedio":0.67},
+{"nombre":"Ronaldo","equipo":"Brasil","goles":15,"partidos":19,"promedio":0.79},
+{"nombre":"Gerd Müller","equipo":"Alemania","goles":14,"partidos":13,"promedio":1.08},
+{"nombre":"Just Fontaine","equipo":"Francia","goles":13,"partidos":6,"promedio":2.17},
+{"nombre":"Pelé","equipo":"Brasil","goles":12,"partidos":14,"promedio":0.86},
+{"nombre":"Sándor Kocsis","equipo":"Hungría","goles":11,"partidos":5,"promedio":2.2},
+{"nombre":"Jürgen Klinsmann","equipo":"Alemania","goles":11,"partidos":17,"promedio":0.65},
+{"nombre":"Helmut Rahn","equipo":"Alemania","goles":10,"partidos":10,"promedio":1},
+{"nombre":"Gabriel Batistuta","equipo":"Argentina","goles":10,"partidos":12,"promedio":0.83},
+{"nombre":"Gary Lineker","equipo":"Inglaterra","goles":10,"partidos":12,"promedio":0.83},
+{"nombre":"Thomas Müller","equipo":"Alemania","goles":10,"partidos":13,"promedio":0.77},
+{"nombre":"Teófilo Cubillas","equipo":"Perú","goles":10,"partidos":13,"promedio":0.77},
+{"nombre":"Grzegorz Lato","equipo":"Polonia","goles":10,"partidos":20,"promedio":0.5},
+{"nombre":"Eusébio","equipo":"Portugal","goles":9,"partidos":6,"promedio":1.5},
+{"nombre":"Christian Vieri","equipo":"Italia","goles":9,"partidos":9,"promedio":1},
+{"nombre":"Vavá","equipo":"Brasil","goles":9,"partidos":10,"promedio":0.9},
+{"nombre":"David Villa","equipo":"España","goles":9,"partidos":12,"promedio":0.75},
+{"nombre":"Paolo Rossi","equipo":"Italia","goles":9,"partidos":14,"promedio":0.64},
+{"nombre":"Jairzinho","equipo":"Brasil","goles":9,"partidos":16,"promedio":0.56},
+{"nombre":"Karl-Heinz Rummenigge","equipo":"Alemania","goles":9,"partidos":20,"promedio":0.45},
+{"nombre":"Guillermo Stábile","equipo":"Argentina","goles":8,"partidos":4,"promedio":2},
+{"nombre":"Leônidas da Silva","equipo":"Brasil","goles":8,"partidos":5,"promedio":1.6},
+{"nombre":"Ademir","equipo":"Brasil","goles":8,"partidos":6,"promedio":1.33},
+{"nombre":"Óscar Míguez","equipo":"Uruguay","goles":8,"partidos":7,"promedio":1.14},
+{"nombre":"Diego Armando Maradona","equipo":"Argentina","goles":8,"partidos":21,"promedio":0.38}
+]</code></pre>
+          </div>
 
         </div>
       </div>
@@ -26,5 +102,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        hljs.initHighlightingOnLoad();
+      });
+      </script>
   </body>
 </html>
