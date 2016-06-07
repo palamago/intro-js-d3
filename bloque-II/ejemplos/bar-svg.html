@@ -3,11 +3,38 @@
 <head>
   <meta charset="utf-8"/>
   <title>Un pequeño documento</title>
+
+	<style type="text/css">
+		
+		rect{
+			fill:steelblue;
+		}
+
+		rect:hover{
+			fill:red;
+		}
+
+		.axis {
+		  font-size: 10px;
+		  font-family: sans-serif;
+		}
+
+		.axis path,
+		.axis line {
+		  fill: none;
+		  stroke: #000;
+		  shape-rendering: crispEdges;
+		}
+
+	</style>
+
+
 </head>
 <body>
   
   <h2>Goleadores en mundiales</h2>
   <div id="chart"></div>
+  <div id="detalles"></div>
 
   <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   
@@ -40,7 +67,73 @@
 		{"nombre":"Diego Armando Maradona","equipo":"Argentina","goles":8,"partidos":21,"promedio":0.38}
 	];
 
-	//Crear viz
+	// Tamaños
+	var margin = {top: 20, right: 20, bottom: 150, left: 40},
+	    width = 960 - margin.left - margin.right,
+	    height = 500 - margin.top - margin.bottom;
+
+	//Escalas
+	var jugadores = data.map(function(d) { return d.nombre; });
+
+	var golesMax = d3.max(data,function(d){
+	    	return d.goles;
+	    });
+
+	var x = d3.scale.ordinal()
+		.domain(jugadores)
+	    .rangeRoundBands([0, width], .1);
+
+	var y = d3.scale.linear()
+		.domain([0,golesMax])
+	    .range([height, 0]);
+
+	// Crear SVG
+	var svg = d3.select("body").append("svg")
+	    .attr("width", width + margin.left + margin.right)
+	    .attr("height", height + margin.top + margin.bottom)
+	  	.append("g")
+	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	//Crear barras
+	svg.selectAll(".bar")
+    	.data(data)
+    	.enter().append("rect")
+      	.attr("class", "bar")
+      	.attr("x", function(d) { return x(d.nombre); })
+      	.attr("width", x.rangeBand())
+      	.attr("y", function(d) { return y(d.goles); })
+      	.attr("height", function(d) { return height - y(d.goles); })
+
+      	.on("mouseenter", function(d){
+      		d3.select('#detalles').html(d.nombre+' metió '+d.goles+' goles.');
+      	})
+      	.on("mouseout", function(d){
+      		d3.select('#detalles').html('...');
+      	});
+
+    //Ejes
+   	var xAxis = d3.svg.axis()
+	    .scale(x)
+	    .orient("bottom");
+
+	var yAxis = d3.svg.axis()
+	    .scale(y)
+	    .orient("left");
+
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .selectAll("text")
+		.attr("y", 0)
+		.attr("x", 10)
+		.attr("dy", ".20em")
+		.attr("transform", "rotate(90)")
+		.style("text-anchor", "start");
+
+  	svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
 
   </script>
 

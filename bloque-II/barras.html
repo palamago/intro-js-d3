@@ -57,9 +57,123 @@ d3.select("#chart")
 
           <h3>Gráfico en d3 usando svg</h3>
           <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/template.html">Ver template</a> <a class="btn btn-xs btn-success" target="_blank" href="ejemplos/bar-svg.html">Ver solución</a></p>
-          <p>Actividad D3: Dada la información de los goleadores de los mundiales crear un gráfico de barras horizontales, usando rect de SVG, d3.js y CSS.</p>
+          <p>Actividad D3: Dada la información de los goleadores de los mundiales crear un gráfico de barras verticales, usando rect de SVG, d3.js y CSS.</p>
+<pre><code class="javascript">// Tamaños
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+//Escalas
+var jugadores = data.map(function(d) { return d.nombre; });
+
+var golesMax = d3.max(data,function(d){
+      return d.goles;
+    });
+
+var x = d3.scale.ordinal()
+  .domain(jugadores)
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+  .domain([0,golesMax])
+    .range([height, 0]);
+
+// Crear SVG
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+//Crear barras
+svg.selectAll(".bar")
+    .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.nombre); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.goles); })
+      .attr("height", function(d) { return height - y(d.goles); });
+</code></pre>
 
 
+
+    <p>Luego agregamos los ejes</p>
+<pre><code class="javascript">//Ejes
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+  svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+  svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);</code></pre>
+
+<p>Le damos estilo a los elementos SVG de los ejes:</p>
+<pre><code class="css">.axis {
+  font-size: 10px;
+  font-family: sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}</code></pre>
+
+<p>Rotamos los labels para que puedan leerse (agrandamos el margen inferior si se cortan los nombres):</p>
+<pre><code class="javascript">svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+    .selectAll("text")
+    .attr("y", 0)
+    .attr("x", 10)
+    .attr("dy", ".20em")
+    .attr("transform", "rotate(90)")
+    .style("text-anchor", "start");</code></pre>
+     
+<p>Interacción, traemos los datos y los mostramos en consola:</p>
+<pre><code class="javascript">//Interaccion del mouse sobre las barras
+.on("mouseenter", function(d){
+  console.log('entro',d);
+})
+.on("mouseout", function(d){
+  console.log('salgo',d);
+});</code></pre>
+
+
+<p>Creamos un div de detalle para mostrar los datos:</p>
+<pre><code class="html">&lt;div id="detalles"&gt;&lt;/div&gt;</code></pre>
+
+
+<p>Llenamos el div que preparamos con información cuando pasamos por arriba y cuando salimos lo limpiamos:</p>
+<pre><code class="javascript">.on("mouseenter", function(d){
+  d3.select('#detalles').html(d.nombre+' metió '+d.goles+' goles.');
+})
+.on("mouseout", function(d){
+  d3.select('#detalles').html('...');
+});</code></pre>
+       
+
+<p>Interacción, desde CSS:</p>
+<pre><code class="css">rect{
+  fill:blue;
+}
+
+rect:hover{
+  fill:red;
+}</code></pre> 
+
+<p>¿Quedó similar a esto <a class="btn btn-xs btn-success" target="_blank" href="ejemplos/bar-svg.html">la solución</a>?</p>
 
           </div>
 
