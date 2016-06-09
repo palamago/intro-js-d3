@@ -12,15 +12,155 @@
   </head>
   <body>
     <div class="container">
-        <div class="row">
-          <h1>D3: gráfico de círculos <a class="btn btn-primary pull-right" href="../index.html">Volver</a></h1>
-          <hr>
 
-          <p>Crearemos un gráfico de círculos:</p>
+        <div class="row">
+          <div class="col-md-12">
+            <h1>D3: gráfico scatterplot <a class="btn btn-primary pull-right" href="../index.html">Volver</a></h1>
+            <hr>
+          </div>
+
+          <div class="col-md-12">
+            <h2>Gráfico scatterplot</h2>
+            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/template.html">Ver template</a> <a class="btn btn-xs btn-success" target="_blank" href="ejemplos/scatterplot.html">Ver solución</a></p>
+            <p>Actividad D3: Dada la información de los goleadores de los mundiales crear un gráfico scatterplot usando d3.js y CSS.</p>
+            
+            <h3>SVG</h3>
+            <p>Definimos variables con tamaños y creamos el SVG</p>
+<pre><code class="javascript">// Tamaños
+var margin = {top: 20, right: 20, bottom: 150, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// Crear SVG
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");</code></pre>
+
+            <h3>Máximos</h3>
+            <p>Calcular el máximo de cada variable a utilizar.</p>
+
+<pre><code class="javascript">//Máximos
+var golesMax = d3.max(data,function(d){
+      return d.goles;
+    });
+var partidosMax = d3.max(data,function(d){
+    return d.partidos;
+  });</code></pre>
+
+
+            <h3>Escalas</h3>
+            <p>Setear las escalas para cada eje.</p>
+
+<pre><code class="javascript">//Escalas
+var x = d3.scale.linear()
+  .domain([0,partidosMax])
+    .range([0, width]);
+
+var y = d3.scale.linear()
+  .domain([0,golesMax])
+    .range([height, 0]);</code></pre>
+  
+            <h3>Ejes</h3>
+            <p>Crear los ejes con las escalas y agregarlos al svg.</p>
+
+<pre><code class="javascript">//Ejes
+var xAxis = d3.svg.axis()
+  .scale(x)
+  .orient("bottom");
+
+var yAxis = d3.svg.axis()
+  .scale(y)
+  .orient("left");
+
+svg.append("g")
+  .attr("class", "x axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis)
+
+svg.append("g")
+  .attr("class", "y axis")
+  .call(yAxis);</code></pre>
+
+            <img class="img-responsive" src="scatterplot1.png" />
+
+            <h3>Círculos</h3>
+            <p>Creamos los círculos y los ubicamos de acuerdo a las escalas</p>
+
+<pre><code class="javascript">//Círculos
+svg.selectAll(".circulos")
+  .data(data)
+  .enter()
+  .append("circle")
+  .attr("class", "circulos")
+  .attr("cx", function(d) { return x(d.partidos); })
+  .attr("cy", function(d) { return y(d.goles); })
+  .attr("r", function(d) { return 20 });</code></pre>
+
+            <img class="img-responsive" src="scatterplot2.png" />
+
+            <h3>Escala para el radio</h3>
+            <p>Calculamos máximo, creamos escala y aplicamos radio.</p>
+
+<pre><code class="javascript">//Promedio máximo
+var promedioMax = d3.max(data,function(d){
+  return d.promedio;
+});
+
+//Escala para radio
+var radio = d3.scale.linear()
+  .domain([0,promedioMax])
+  .range([0, 20]);
+
+//Modifico el radio del círculo para que utilice la escala
+//...
+.attr("r", function(d) { return radio(d.promedio); });
+</code></pre>
+            <img class="img-responsive" src="scatterplot3.png" />
+
+<h3>Escala para el colores</h3>
+            <p>Calculamos máximo, creamos escala y aplicamos radio.</p>
+
+<pre><code class="javascript">//Creo la escala de colores
+var color = d3.scale.category20();
+
+//Agrego el color al círculo usando la escala basado en el equipo
+//...
+.style("fill", function(d) { return color(d.equipo);}) 
+</code></pre>
+            <img class="img-responsive" src="scatterplot4.png" />
+
+            <h3>Legenda</h3>
+            <p>Creamos la leyenda con el cuadrado y el nombre.</p>
+
+<pre><code class="javascript">//Legend
+var legend = svg.selectAll(".legend")
+  .data(color.domain())
+  .enter().append("g")
+  .attr("class", "legend")
+  .attr("transform", function(d, i) { return "translate("+(width+20)+"," + i * 22 + ")"; });
+
+// draw legend colored rectangles
+legend.append("rect")
+  .attr("x", 0)
+  .attr("width", 20)
+  .attr("height", 20)
+  .style("fill", color);
+
+// draw legend text
+legend.append("text")
+  .attr("x", 22)
+  .attr("y", 15)
+  .text(function(d) { return d;})</code></pre>
+          <img class="img-responsive" src="scatterplot5.png" />
+
+
+          </div>
 
         </div>
-      </div>
-    </div>
+
+    </div><!-- Container -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

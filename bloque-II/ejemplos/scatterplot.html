@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Un pequeño documento</title>
+
+	<style type="text/css">
+
+		.axis {
+		  font-size: 10px;
+		  font-family: sans-serif;
+		}
+
+		.axis path,
+		.axis line {
+		  fill: none;
+		  stroke: #000;
+		  shape-rendering: crispEdges;
+		}
+
+	</style>
+
+</head>
+<body>
+  
+  <h2>Goleadores en mundiales</h2>
+  <div id="chart"></div>
+
+
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+  <script type="text/javascript">
+  	var data = [
+		{"nombre":"Miroslav Klose","equipo":"Alemania","goles":16,"partidos":24,"promedio":0.67},
+		{"nombre":"Ronaldo","equipo":"Brasil","goles":15,"partidos":19,"promedio":0.79},
+		{"nombre":"Gerd Müller","equipo":"Alemania","goles":14,"partidos":13,"promedio":1.08},
+		{"nombre":"Just Fontaine","equipo":"Francia","goles":13,"partidos":6,"promedio":2.17},
+		{"nombre":"Pelé","equipo":"Brasil","goles":12,"partidos":14,"promedio":0.86},
+		{"nombre":"Sándor Kocsis","equipo":"Hungría","goles":11,"partidos":5,"promedio":2.2},
+		{"nombre":"Jürgen Klinsmann","equipo":"Alemania","goles":11,"partidos":17,"promedio":0.65},
+		{"nombre":"Helmut Rahn","equipo":"Alemania","goles":10,"partidos":10,"promedio":1},
+		{"nombre":"Gabriel Batistuta","equipo":"Argentina","goles":10,"partidos":12,"promedio":0.83},
+		{"nombre":"Gary Lineker","equipo":"Inglaterra","goles":10,"partidos":12,"promedio":0.83},
+		{"nombre":"Thomas Müller","equipo":"Alemania","goles":10,"partidos":13,"promedio":0.77},
+		{"nombre":"Teófilo Cubillas","equipo":"Perú","goles":10,"partidos":13,"promedio":0.77},
+		{"nombre":"Grzegorz Lato","equipo":"Polonia","goles":10,"partidos":20,"promedio":0.5},
+		{"nombre":"Eusébio","equipo":"Portugal","goles":9,"partidos":6,"promedio":1.5},
+		{"nombre":"Christian Vieri","equipo":"Italia","goles":9,"partidos":9,"promedio":1},
+		{"nombre":"Vavá","equipo":"Brasil","goles":9,"partidos":10,"promedio":0.9},
+		{"nombre":"David Villa","equipo":"España","goles":9,"partidos":12,"promedio":0.75},
+		{"nombre":"Paolo Rossi","equipo":"Italia","goles":9,"partidos":14,"promedio":0.64},
+		{"nombre":"Jairzinho","equipo":"Brasil","goles":9,"partidos":16,"promedio":0.56},
+		{"nombre":"Karl-Heinz Rummenigge","equipo":"Alemania","goles":9,"partidos":20,"promedio":0.45},
+		{"nombre":"Guillermo Stábile","equipo":"Argentina","goles":8,"partidos":4,"promedio":2},
+		{"nombre":"Leônidas da Silva","equipo":"Brasil","goles":8,"partidos":5,"promedio":1.6},
+		{"nombre":"Ademir","equipo":"Brasil","goles":8,"partidos":6,"promedio":1.33},
+		{"nombre":"Óscar Míguez","equipo":"Uruguay","goles":8,"partidos":7,"promedio":1.14},
+		{"nombre":"Diego Armando Maradona","equipo":"Argentina","goles":8,"partidos":21,"promedio":0.38}
+	];
+
+	var color = d3.scale.category20();
+
+	// Tamaños
+	var margin = {top: 20, right: 110, bottom: 150, left: 40},
+	    width = 1000 - margin.left - margin.right,
+	    height = 500 - margin.top - margin.bottom;
+
+	// Crear SVG
+	var svg = d3.select("#chart").append("svg")
+	    .attr("width", width + margin.left + margin.right)
+	    .attr("height", height + margin.top + margin.bottom)
+	  	.append("g")
+	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	//Escalas
+	var golesMax = d3.max(data,function(d){
+	    	return d.goles;
+	    });
+	var partidosMax = d3.max(data,function(d){
+    	return d.partidos;
+    });
+	var promedioMax = d3.max(data,function(d){
+    	return d.promedio;
+    });
+
+	var x = d3.scale.linear()
+		.domain([0,partidosMax])
+	    .range([0, width]);
+
+	var y = d3.scale.linear()
+		.domain([0,golesMax])
+	    .range([height, 0]);
+
+	var radio = d3.scale.linear()
+		.domain([0,promedioMax])
+	    .range([0, 20]);
+
+	//Ejes
+   	var xAxis = d3.svg.axis()
+	    .scale(x)
+	    .orient("bottom");
+
+	var yAxis = d3.svg.axis()
+	    .scale(y)
+	    .orient("left");
+
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+
+  	svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+	//Crear circulos
+	svg.selectAll(".circulos")
+    	.data(data)
+    	.enter().append("circle")
+      	.attr("class", "circulos")
+      	.attr("cx", function(d) { return x(d.partidos); })
+      	.attr("cy", function(d) { return y(d.goles); })
+      	.style("fill", function(d) { return color(d.equipo);}) 
+      	.attr("r", function(d) { return radio(d.promedio); });
+
+
+    //Legend
+	var legend = svg.selectAll(".legend")
+	  .data(color.domain())
+	  .enter().append("g")
+	  .attr("class", "legend")
+	  .attr("transform", function(d, i) { return "translate("+(width+20)+"," + i * 22 + ")"; });
+
+	// draw legend colored rectangles
+	legend.append("rect")
+	  .attr("x", 0)
+	  .attr("width", 20)
+	  .attr("height", 20)
+	  .style("fill", color);
+
+	// draw legend text
+	legend.append("text")
+	  .attr("x", 22)
+	  .attr("y", 15)
+	  .text(function(d) { return d;})
+
+  </script>
+
+</body>
+</html>
