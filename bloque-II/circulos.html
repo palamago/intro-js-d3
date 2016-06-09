@@ -9,6 +9,14 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+  <style type="text/css">
+    img{
+      width: 100%;
+    }
+  </style>
+
+
   </head>
   <body>
     <div class="container">
@@ -21,7 +29,8 @@
 
           <div class="col-md-12">
             <h2>Gráfico scatterplot</h2>
-            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/template.html">Ver template</a> <a class="btn btn-xs btn-success" target="_blank" href="ejemplos/scatterplot.html">Ver solución</a></p>
+            <p><a class="btn btn-xs btn-success" target="_blank" href="ejemplos/template.html">Ver template</a></p>
+            <img class="img-responsive" src="scatterplot.png" />
             <p>Actividad D3: Dada la información de los goleadores de los mundiales crear un gráfico scatterplot usando d3.js y CSS.</p>
             
             <h3>SVG</h3>
@@ -155,16 +164,147 @@ legend.append("text")
   .text(function(d) { return d;})</code></pre>
           <img class="img-responsive" src="scatterplot5.png" />
 
+      <h3>Agregamos acciones del mouse</h3>
+      <p>Eventos sobre los círculos</p>
 
+<pre><code class="javascript">.on("mouseenter", function(d){
+  console.log('entra',d);
+})
+.on("mouseout", function(d){
+  console.log('sale');
+});</code></pre>
+
+      <h3>Creamos el círculo de selección animado</h3>
+      <p>Un nuevo círculo, suelto en el svg que lo moveremos cuando sea pasemos por otro círculo.</p>
+
+<pre><code class="javascript">//Círculo de selección
+var seleccion = svg.append('circle')
+  .attr("class", "seleccion")
+  .attr('cx',0)
+  .attr('cy',0)
+  .attr('r',10)
+  .style('fill','none')
+  .style('stroke','black')
+  .style('stroke-width',2);</code></pre>
+
+    <p>Cambiamos ubicación, color y radio del círculo al hacer contacto con el mouse.</p>
+
+<div class="row">
+  <div class="col-md-6">
+    <pre><code class="javascript">seleccion
+        .attr('cx',x(d.partidos))
+        .attr('cy',y(d.goles))
+        .attr('r',radio(d.promedio)+4)
+        .style('stroke',color(d.equipo));</code></pre>
+  </div>
+  <div class="col-md-6">
+      <img class="img-responsive" src="scatterplot5.gif" />
+  </div>
+</div>
+
+
+
+      <p>Hacemos que aparezca apagado y se prenda cuando lo necestamos y se vuelva a apagar.</p>
+
+<pre><code class="javascript">//invisible
+.style('opacity',0);
+
+//visible
+.style('opacity',1);
+</code></pre>
+
+      <p>Usamos transition para agrandarlo al momento del mouseenter y achicharlo en el mouseout</p>
+
+<div class="row">
+  <div class="col-md-6">
+<pre><code class="javascript">.on("mouseenter", function(d){
+  seleccion
+    .attr('cx',x(d.partidos))
+    .attr('cy',y(d.goles))
+    .attr('r',0)
+    .style('stroke',color(d.equipo))
+    .transition()
+    .duration(500)
+    .attr('r',radio(d.promedio)+4)
+    .style('opacity',1);
+})
+.on("mouseout", function(d){
+  seleccion
+    .transition()
+    .duration(200)
+    .attr('r',0)
+    .style('opacity',0);
+});</code></pre>
+  </div>
+  <div class="col-md-6">
+        <img class="img-responsive" src="scatterplot6.gif" />
+  </div>
+</div>
+
+      <h3>Tooltip</h3>
+      <p>Mostramos el nombre del jugador, cuando estemos por encima del círculo.</p>
+
+<div class="row">
+  <div class="col-md-6">
+<pre><code class="javascript">var seleccionTexto = svg.append('text')
+    .attr("class", "seleccionTexto")
+    .attr('x',0)
+    .attr('y',0)
+    .attr('text-anchor',"middle")
+    .text('ejemplo de texto');</code></pre>
+      <p>Creamos un texto suelto</p>
+
+      
+    <p>En el mousenter lo ubicamos y le ponemos el texto del nombre.</p>
+    <p>Agregar estilo y color a gusto. :D</p>
+<pre><code class="javascript">seleccionTexto
+            .attr('x',x(d.partidos))
+            .attr('y',y(d.goles)-radio(d.promedio)-5)
+            .text(d.nombre);</code></pre>
+  </div>
+  <div class="col-md-6">
+        <img class="img-responsive" src="scatterplot7.gif" />
+  </div>
+</div>
+
+          <h3>Líneas</h3>
+          <p>Sin más ayuda que la documentación, crear estas líneas que ayudan a identificar el valor en el eje.</p>
+          <p><a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/line" target="_blank">MDN Line</a> y <a href="https://github.com/d3/d3/wiki/Tutorials" target="_blank">D3 Tutorials</a></p>
+            <img class="img-responsive" src="scatterplot8.gif" />
+
+          <div class="row">
+            <div class="col-md-6">
+                <h3>Solución</h3>
+                <p>¿Quedó algo parecido a <a class="btn btn-xs btn-success" target="_blank" href="ejemplos/scatterplot.html">Ver solución</a> ?</p>
+            </div>
+            <div class="col-md-6">
+            </div>
           </div>
+
+
+            </div>
 
         </div>
 
     </div><!-- Container -->
 
+    <hr/>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Pablo H. Paladino - <a href="http://twitter.com/palamago">@palamago</a></p>
+      </div>
+    </footer>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        hljs.initHighlightingOnLoad();
+      });
+      </script>
   </body>
 </html>

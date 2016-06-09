@@ -18,6 +18,17 @@
 		  shape-rendering: crispEdges;
 		}
 
+		.seleccionTexto{
+			font-size: 10px;
+			font-family: Verdana;
+		}
+
+		.legend text{
+			font-family: Verdana;
+			font-size: 12px;
+		}
+
+
 	</style>
 
 </head>
@@ -113,6 +124,27 @@
       .attr("class", "y axis")
       .call(yAxis);
 
+     var lineaX = svg.append('line')
+		.attr('x1',0)
+		.attr('y1',0)
+		.attr('x1',width)
+		.attr('y1',width)
+		.style('opacity',0)
+		.style('stroke','black')
+		.style('stroke-width',1);
+
+     var lineaY = svg.append('line')
+		.style('stroke','#777')
+		.style('stroke-width',1)
+		.style('stroke-dasharray',"5,5")
+		.style('opacity',0);
+
+     var lineaX = svg.append('line')
+		.style('stroke','#777')
+		.style('stroke-width',1)
+		.style('stroke-dasharray',"5,5")
+		.style('opacity',0);
+
 	//Crear circulos
 	svg.selectAll(".circulos")
     	.data(data)
@@ -121,8 +153,74 @@
       	.attr("cx", function(d) { return x(d.partidos); })
       	.attr("cy", function(d) { return y(d.goles); })
       	.style("fill", function(d) { return color(d.equipo);}) 
-      	.attr("r", function(d) { return radio(d.promedio); });
+      	.attr("r", function(d) { return radio(d.promedio); })
+      	
+      	.on("mouseenter", function(d){
+      		seleccion
+      			.attr('cx',x(d.partidos))
+      			.attr('cy',y(d.goles))
+      			.attr('r',radio(d.promedio))
+      			.style('stroke',color(d.equipo))
+      			.transition()
+      			.duration(500)
+      			.attr('r',radio(d.promedio)+4)
+      			.style('opacity',1);
 
+      		seleccionTexto
+      			.attr('x',x(d.partidos))
+      			.attr('y',y(d.goles)-radio(d.promedio)-6)
+      			.attr('fill',color(d.equipo))
+      			.style('opacity',1)
+      			.text(d.nombre);
+
+      		lineaX
+	      		.style('opacity',1)
+	      		.attr('x1',x(d.partidos))
+				.attr('y1',y(d.goles))
+
+				.attr('x2',x(d.partidos))
+				.attr('y2',y(0));
+
+			lineaY
+	      		.style('opacity',1)
+	      		.attr('x1',x(d.partidos))
+				.attr('y1',y(d.goles))
+
+				.attr('x2',x(0))
+				.attr('y2',y(d.goles));
+      	})
+      	.on("mouseout", function(d){
+      		seleccion
+      			.attr('r',0)
+      			.style('opacity',0);
+
+      		seleccionTexto
+      			.attr('r',0)
+      			.style('opacity',0);
+
+      		lineaY
+	      		.style('opacity',0);
+	      	lineaX
+	      		.style('opacity',0)
+      	});
+
+	//Círculo de selección
+	var seleccion = svg.append('circle')
+		.attr("class", "seleccion")
+		.attr('cx',0)
+		.attr('cy',0)
+		.attr('r',10)
+		.style('fill','none')
+		.style('opacity',0)
+		.style('stroke','black')
+		.style('stroke-width',2);
+
+	//Text de selección
+	var seleccionTexto = svg.append('text')
+		.attr("class", "seleccionTexto")
+		.attr('x',0)
+		.attr('y',0)
+		.attr('text-anchor',"middle");
 
     //Legend
 	var legend = svg.selectAll(".legend")
