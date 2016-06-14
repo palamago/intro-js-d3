@@ -1,33 +1,17 @@
 # Introducción a Javascript y D3.js
 
-##Bloque I
+Ver online: [aquí](http://palamago.github.io/intro-js-d3/)
 
-###Introducción Javascript
+##Contenido
 
-Seguiremos el tutorial [JS para gatos](https://jsparagatos.com/) aprendiendo y practicando en la consola los siguientes conceptos.
+###Bloque I
 
-* Consola del navegador
-* Strings
-* Variables
-* Funciones
-* Librerías
-* Ciclos / Bucles
-* Arrays
-* Objetos
-* Callbacks
+* Introducción Javascript
+* Introducción a desarrollo frontend
+* Introducción d3.js
 
-###Introducción a desarrollo frontend
+###Bloque II - Taller
 
-* Frontend & Backend
-* HTML + CSS
-* Archivo JS en lugar de consola
-* SVG shapes, Canvas
-* Data:CSV y JSON
-
-###Introducción d3.js
-
-* Introducción a d3.js como librería
-* Ejemplos de la posibilidad de d3
-
-
-##Bloque II
+* Gráfico de barras en D3.
+* Gráfico de círculos en D3. (scatterplot) 
+* Librerías y herramientas sobre D3
