@@ -1,5 +1,4 @@
 
-Inline-style: 
 ![d3](https://www.pubnub.com/wp-content/uploads/2014/01/D3.js-Logo.png)
 
 # Introducción a Javascript y D3.js
